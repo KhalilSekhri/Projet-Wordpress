@@ -1,17 +1,5 @@
 <?php
 /**
- * Plugin Name: Insert - Google Analytics
- * Plugin URI: http://www.wangzhenchao.com/
- * Version: 1.0.0
- * Author: WANGZHENCHAO
- * Author URI: http://www.wangzhenchao.com/
- * Description: Allows you to insert code or text in the header of your WordPress blog
- * License: GPL2
- * Text Domain: insert - Google Analytics
- */
-
-
-/**
  * Insert Headers Class
  */
 class InsertHeaders {
