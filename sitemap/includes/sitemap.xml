@@ -1,0 +1,25 @@
+<urlset><?xml version="1.0" encoding="UTF-8"?>        <!-- generated-on=2019-07-02 14:26:27-->
+        <url>
+            <loc>http://localhost:8080</loc>
+            <lastmod>2019-07-02T12:26:27 00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>1.0</priority>
+        </url>
+                    <url>
+                <loc>http://localhost:8080/?p=1</loc>
+                <lastmod>2019-07-02T14:26:27 02:00</lastmod>
+                <changefreq>monthly</changefreq>
+                <priority>0.6</priority>
+            </url>
+                            <url>
+                <loc>http://localhost:8080/?page_id=2</loc>
+                <lastmod>2019-07-02T14:26:27 00:00</lastmod>
+                <changefreq>weekly</changefreq>
+                <priority>0.6</priority>
+            </url>
+                            <url>
+                    <loc>http://localhost:8080/?cat=1</loc>
+                    <changefreq>weekly</changefreq>
+                    <priority>0.8</priority>
+                </url>
+                        </urlset>
