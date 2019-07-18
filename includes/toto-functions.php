@@ -119,21 +119,31 @@ add_shortcode( 'SEO', 'myplugin_SEO_func' );
 
 function myplugin_SEO_func( $atts ) {
 
-    $i = 1;
+    $post = get_post();
+    $post -> $tes_meta_description;
 
-    $referencement = 0 + i;
+    $title = get_the_title($post);
 
-    $voyantVert = '<div><input type="color" id="head" name="head"value="#7FDD4C"><label for="head">Head</label></div>';
-    $voyantRouge = '<div><input type="color" id="head" name="head"value="#7FDD4C"><label for="head">Head</label></div>';
-    $voyantOrange = '<div><input type="color" id="head" name="head"value="#7FDD4C"><label for="head">Head</label></div>';
+
+
+    $tes_meta_title = get_post_meta( $post->ID, '_tes_meta_title', true );
+
+    $tes_meta_description = get_post_meta( $post->ID, '_tes_meta_description', true );
+
+    $referencement = 2;
+
+    $voyantVert = "<div><label for='head'>Ce site est bien référencé : </label><span id='head' name='head' style='background-color: #7FDD4C'>Good</span></div>";
     
-    if(referencement == 1){
-        return (voyantVert);
-    }else if(referencement == 2){
-        return (voyantOrange);
-    }else if(referencement == 3){
-        return (voyantRouge);
+    $voyantRouge = "<div><label for='head'>Ce site est bien référencé : </label><span id='head' name='head' style='background-color: #FF0000'>BAD</span></div>";
+
+    $voyantOrange = "<div><label for='head'>Ce site est mal référencé : </label><span id='head' name='head' style='background-color: #FF0000'>BAD</span></div>";
+    
+    if($tes_meta_title == $tes_meta_description){
+        return ($voyantVert);
+    }else if($tes_meta_title != $tes_meta_description){
+        return ($voyantRouge);
     }
+
 }
 
 // Les Test SEO
