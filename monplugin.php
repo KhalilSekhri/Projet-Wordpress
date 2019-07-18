@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Mon plugin TOTO
+Plugin Name: LePluginSEO
 Plugin URI: http://monplugintoto.com
 Description: Un plugin pour apprendre à faire des plugins
 Author: Moi

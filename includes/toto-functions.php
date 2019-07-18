@@ -9,7 +9,7 @@ add_action("wp_footer", "myplugin_Footer_Add_Text");
 
 // Texte à afficher dans le footer
 function myplugin_Footer_Add_Text() {
-	echo "<i>Mon plugin TOTO est activé!</i>";
+	echo "<i>Bienvenu chez vous</i>";
 }
 
 /*
@@ -26,7 +26,7 @@ function myplugin_Add_My_Admin_Link()
         'Plugin TOTO Page', // Titre de la page
         'Plugin TOTO', // Texte du lien dans le menu
         'manage_options', // capacité nécessaire pour accéder au lien
-        'monplugin/includes/toto-acp-page.php' // fichier à afficher quand on clique sur le lien
+        'Projet-Wordpress/includes/toto-acp-page.php' // fichier à afficher quand on clique sur le lien
     );
 }
 
@@ -114,6 +114,47 @@ function myplugin_titi_func( $atts ) {
 	return "<p>x = {$a['x']} & y = {$a['y']}</p>";
 }
 
+
+add_shortcode( 'SEO', 'myplugin_SEO_func' );
+
+function myplugin_SEO_func( $atts ) {
+
+    $i = 1;
+
+    $referencement = 0 + i;
+
+    $voyantVert = '<div><input type="color" id="head" name="head"value="#7FDD4C"><label for="head">Head</label></div>';
+    $voyantRouge = '<div><input type="color" id="head" name="head"value="#7FDD4C"><label for="head">Head</label></div>';
+    $voyantOrange = '<div><input type="color" id="head" name="head"value="#7FDD4C"><label for="head">Head</label></div>';
+    
+    if(referencement == 1){
+        return (voyantVert);
+    }else if(referencement == 2){
+        return (voyantOrange);
+    }else if(referencement == 3){
+        return (voyantRouge);
+    }
+}
+
+// Les Test SEO
+/*
+$var = file_get_contents($file);
+
+$valeur = $title; // nous cherchons la valeur 1
+
+if(in_array($valeur, $tableau)){
+	echo 'valeur trouvée';
+} else{
+	echo 'valeur non trouvée';
+}*/
+
+/*
+ * Afficher du texte dans le pied de page - test
+ */
+
+ 
+
+// Plugin SEO Meta-Descirption & Titre
 function tes_mb_create() {
  
     add_meta_box(
@@ -138,11 +179,11 @@ add_action('add_meta_boxes', 'tes_mb_create');
 
 function tes_mb_function($post) {
  
-    //retrieve the metadata values if they exist
+
     $tes_meta_title = get_post_meta( $post->ID, '_tes_meta_title', true );
     $tes_meta_description = get_post_meta( $post->ID, '_tes_meta_description', true );
  
-    // Add an nonce field so we can check for it later when validating
+
     wp_nonce_field( 'tes_inner_custom_box', 'tes_inner_custom_box_nonce' );
  
     echo '<div style="margin: 10px 100px; text-align: center">
@@ -161,26 +202,17 @@ function tes_mb_function($post) {
 
 function tes_mb_save_data($post_id) {
  
-    /*
-     * We need to verify this came from the our screen and with proper authorization,
-     * because save_post can be triggered at other times.
-     */
- 
-    // Check if our nonce is set.
     if ( ! isset( $_POST['tes_inner_custom_box_nonce'] ) )
         return $post_id;
  
     $nonce = $_POST['tes_inner_custom_box_nonce'];
  
-    // Verify that the nonce is valid.
     if ( ! wp_verify_nonce( $nonce, 'tes_inner_custom_box' ) )
         return $post_id;
  
-    // If this is an autosave, our form has not been submitted, so we don't want to do anything.
     if ( defined( 'DOING_AUTOSAVE') && DOING_AUTOSAVE )
         return $post_id;
  
-    // Check the user's permissions.
     if ( 'page' == $_POST['post_type'] ) {
  
         if ( ! current_user_can( 'edit_page', $post_id ) )
@@ -191,17 +223,15 @@ function tes_mb_save_data($post_id) {
             return $post_id;
     }
  
-    /* OK, its safe for us to save the data now. */
- 
-    // If old entries exist, retrieve them
+
     $old_title = get_post_meta( $post_id, '_tes_meta_title', true );
     $old_description = get_post_meta( $post_id, '_tes_meta_description', true );
  
-    // Sanitize user input.
+
     $title = sanitize_text_field( $_POST['tes_meta_title'] );
     $description = sanitize_text_field( $_POST['tes_meta_description'] );
- 
-    // Update the meta field in the database.
+
+
     update_post_meta( $post_id, '_tes_meta_title', $title, $old_title );
     update_post_meta( $post_id, '_tes_meta_description', $description, $old_description );
 }
@@ -211,15 +241,28 @@ function tes_mb_display() {
  
     global $post;
      
-    // retrieve the metadata values if they exist
+
     $tes_meta_title = get_post_meta( $post->ID, '_tes_meta_title', true );
     $tes_meta_description = get_post_meta( $post->ID, '_tes_meta_description', true );
  
-    echo ' <!-- Tutsplus Easy SEO (author: http://tech4sky.com) -->
-    <meta property="og:title" content="' . $tes_meta_title . '" />
+    echo ' <meta property="og:title" content="' . $tes_meta_title . '" />
     <meta property="og:description" content="' . $tes_meta_description . '" />
     <meta name="description" content="' . $tes_meta_description . '" />
-    <!-- /Tutsplus Easy SEO -->
     ';
 }
 add_action( 'wp_head', 'tes_mb_display' );
+
+
+// Hook 'admin_menu' action pour exécuter la fonction named 'myplugin_Add_My_Admin_Link()' au chargement du menu de l'admin Wordpress
+add_action( 'admin_menu', 'myplugin_Add_My_Admin_Link_Sitemap' );
+
+// Ajouter un nouveau lien dans le menu de l'admin Wordpress
+function myplugin_Add_My_Admin_Link_Sitemap()
+{
+  add_menu_page(
+        'Sitemap Generator', // Titre de la page
+        'Sitemap Generator', // Texte du lien dans le menu
+        'manage_options', // capacité nécessaire pour accéder au lien
+        'Projet-Wordpress/includes/sitemap/toto-acp-page.php' // fichier à afficher quand on clique sur le lien
+    );
+}
